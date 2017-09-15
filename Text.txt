@@ -1,0 +1,175 @@
+Create Navigation bar:
+
+https://www.youtube.com/watch?v=VMFZLHrfZV8
+https://www.npmjs.com/package/ui-navbar
+https://github.com/blackat/ui-navbar
+http://plnkr.co/edit/V7tecYv4wNPP198HRQlJ?p=preview
+
+
+
+Sample Excercise:
+
+http://sahatyalkabov.com/create-a-tv-show-tracker-using-angularjs-nodejs-and-mongodb/
+
+https://courses.edx.org/courses/course-v1:MongoDBx+M101x+3T2015/courseware/4cf555e7a26d4fbb87503adf07ef03ce/bcfa6ac5c1954663a85b818058b1e5e7/
+
+https://lp-training.atlassian.net/secure/Dashboard.jspa
+
+
+D3.js Implementation:
+
+/*
+            console.log("Finding Tree data")
+            console.log(data)
+
+
+            data = JSON.stringify(data)
+            data = data.replace(/"actor":/g, '"children":');
+            data = data.replace(/"productName":/g, '"name":');
+            console.log("Replaced data")
+            console.log(data)
+            data = JSON.parse(data);
+
+
+
+            var treeData =data;
+            console.log(treeData)
+
+/!*            var margin = {top: 40, right: 120, bottom: 20, left: 120},
+                width = 960 - margin.right - margin.left,
+                height = 500 - margin.top - margin.bottom;*!/
+
+
+            var margin = {
+                    top: 20,
+                    right: 120,
+                    bottom: 20,
+                    left: 120
+                },
+                width = 960 - margin.right - margin.left,
+                height = 500 - margin.top - margin.bottom;
+
+            var i = 0;
+
+
+
+            var tree = d3.layout.tree()
+                .size([height, width]);
+
+            var diagonal = d3.svg.diagonal()
+                .projection(function(d) { return [/!*width -*!/ d.y + 30, d.x + 25]; });
+
+
+            var svg = d3.select("#tree").append("svg")
+                .attr("width", width + margin.right + margin.left)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            root = treeData[0];
+
+            update(root);
+
+            function update(source) {
+
+                // Compute the new tree layout.
+                var nodes = tree.nodes(root).reverse(),
+                    links = tree.links(nodes);
+
+                // Normalize for fixed-depth.
+                nodes.forEach(function(d) { d.y = width-(d.depth * 180); });
+
+                // Declare the nodes…
+                var node = svg.selectAll("g.node")
+                    .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+                // Enter the nodes.
+                var nodeEnter = node.enter().append("g")
+                    .attr("class", "node")
+                    .attr("transform", function(d) {
+                        return "translate(" + d.y + "," + d.x + ")"; });
+
+ /!*               nodeEnter.append("circle")
+                /!*nodeEnter.append("new-div")*!/
+                    .attr("r", 20)
+                    .style("fill", "#fff");*!/
+
+
+                nodeEnter.append("rect")
+                    .attr("width", 100)
+                    .attr("height", 40)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1)
+                    .style("fill", function (d) {
+                        return d._children ? "lightsteelblue" : "#fff";
+                    });
+
+           /!*     nodeEnter.append("text")
+                    .attr("y", function(d) {
+                        return d.children || d._children ? -18 : 18; })
+                    .attr("dy", ".35em")
+                    .attr("text-anchor", "middle")
+                    .text(function(d) { return d.name; })
+                    .style("fill-opacity", 1);*!/
+
+                nodeEnter.append("text")
+                    .attr("x", 100 / 2)
+                    .attr("y", 40 / 2)
+                    .attr("dy", ".35em")
+                    .attr("text-anchor", "middle")
+                    .text(function (d) {
+                        return d.name;
+                    });
+                // Declare the links…
+                var link = svg.selectAll("path.link")
+                    .data(links, function(d) { return d.target.id; });
+
+                // Enter the links.
+                link.enter().insert("path", "g")
+                    .attr("class", "link")
+                    .attr("d", diagonal);
+
+            }
+
+
+
+            for (var actor in data){
+                /!*$scope.actors.push(data[actor].actor);*!/
+            }
+            console.log("Printing actors new impl");
+
+            items = data[actor].actor;
+            for (var item in items){
+
+                $scope.actors.push(items[item]);
+            }*/
+
+http://www.techinsight.io/review/devops-and-automation/automating-unit-and-integration-testing-with-the-mean-stack/
+http://mherman.org/blog/2015/09/10/testing-node-js-with-mocha-and-chai/#.V1Enktx97eR
+http://brianstoner.com/blog/testing-in-nodejs-with-mocha/
+http://mherman.org/blog/2016/04/28/test-driven-development-with-node/#.V1Enj9x97eR
+
+
+
+
+## What's next?
+
+[Read the docs](https://bitbucket.org/atlassian/atlassian-connect-express/src/master/README.md#markdown-header-install-dependencies).
+/*"jugglingdb-mongodb": "latest"*/
+
+https://github.com/pasindud/node-login/tree/mysql
+
+Kaizen#!23$
+
+
+
+    <properties>
+        <packaging>pom</packaging>
+        <jira>7.1.0-OD-02-030</jira>
+        <json-schema-validator-atlassian-bundle>1.0.4</json-schema-validator-atlassian-bundle>
+        <jwt-plugin>1.5.4</jwt-plugin>
+        <atlassian-universal-plugin-manager-plugin>2.20.1-D20150924T170115</atlassian-universal-plugin-manager-plugin>
+        <atlassian-connect-plugin>1.1.66</atlassian-connect-plugin>
+        <jira-agile-connect-plugin>1.0.4-D20151202T083056</jira-agile-connect-plugin>
+        <amps.version>6.2.1</amps.version>
+    </properties>

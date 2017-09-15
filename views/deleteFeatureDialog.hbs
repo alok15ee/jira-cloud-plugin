@@ -1,0 +1,46 @@
+{{!< layout}}
+
+
+<body style="background:white">
+
+        <div class="aui-dialog2-content">
+            <script>
+
+                $(function(){
+
+
+                    AP.require('dialog', function(dialog) {
+                        dialog.getButton('submit').bind(function() {
+
+                            AP.require('events', function(events){
+
+                                events.emit('customEvent');
+                            });
+                            return true;
+                            //dialog.close();
+                        });
+
+                        dialog.getButton('cancel').bind(function () {
+                            dialog.close();
+                        });
+                    });
+
+                });
+
+            </script>
+
+            <div class="content">
+
+                <div class="aui-message aui-message-warning">
+                    <p class="title">
+                        <strong>Are you sure you want to delete this product feature?</strong>
+                    </p>
+                    <p>Deleting a product feature will not delete the corresponding issue.</p>
+                </div>
+            </div>
+
+
+
+        </div>
+
+</body>

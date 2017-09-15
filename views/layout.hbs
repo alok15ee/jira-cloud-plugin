@@ -1,0 +1,53 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="ap-local-base-url" content="{{localBaseUrl}}">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.9.5/css/aui.css" media="all">
+    <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.9.5/css/aui-experimental.css" media="all">
+    <!--[if IE 9]><link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.9.5/css/aui-ie9.css" media="all"><![endif]-->
+    <link rel="stylesheet" href="{{furl '/css/addon.css'}}" type="text/css" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <script src="//aui-cdn.atlassian.com/aui-adg/5.9.5/js/aui-soy.js" type="text/javascript"></script>
+    <script src="//aui-cdn.atlassian.com/aui-adg/5.9.5/js/aui.js" type="text/javascript"></script>
+    <script src="//aui-cdn.atlassian.com/aui-adg/5.9.5/js/aui-datepicker.js"></script>
+    <script src="//aui-cdn.atlassian.com/aui-adg/5.9.5/js/aui-experimental.js"></script>
+    <script src="{{furl '/js/jquery.connections.js'}}"></script>
+
+
+    <script src="{{furl '/js/spin.min.js'}}"></script>
+    <script src="{{furl '/js/angular-spinner.min.js'}}"></script>
+    <script src="{{furl '/js/angular-loading-spinner.js'}}"></script>
+
+
+
+    <script src="{{furl '/js/d3.v3.min.js'}}"></script>
+
+
+    <script src="{{furl '/js/controllers/startDiscoveryController.js'}}"></script>
+    <script src="{{furl '/js/controllers/continueDiscoveryController.js'}}"></script>
+    <script src="{{furl '/js/controllers/adminConfigController.js'}}"></script>
+    <script src="{{furl '/js/controllers/productCanvas.js'}}"></script>
+
+
+    <!--<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>-->
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>-->
+
+    <script src="{{furl '/js/addon.js'}}"></script>
+    <script src="{{hostScriptUrl}}" type="text/javascript"></script>
+
+</head>
+<body class="aui-page-hybrid">
+<section id="content" role="main">
+    {{{body}}}
+</section>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+{{!< layout}}
+
+
+<body style="background:white">
+
+        <div class="aui-dialog2-content">
+            <script>
+
+                $(function(){
+
+                    AP.require('dialog', function(dialog) {
+
+
+                        dialog.getButton('submit').bind(function() {
+
+                            AP.require('events', function(events){
+
+                                var actor = $('#actor').val();
+
+
+                                if(!actor.trim()){
+                                    $('.actorError').html(AJS.I18n.getText('actor.empty'));
+                                    return;
+                                }
+                                events.emit('customEvent', actor);
+                                dialog.close();
+                            });
+
+                            //
+                        });
+                        dialog.getButton('cancel').bind(function () {
+                            dialog.close();
+                        });
+                    });
+
+                });
+
+
+
+            </script>
+
+            <div>
+                Who are the people (inside or outside your organization), who can help you achieve the Product Vision?
+            </div>
+
+            <form class="aui" action="#" name="jiraform" id="actorform">
+
+                <div class="content">
+                    <div class="field-group">
+
+                        <label for="summary">Actor<span class="aui-icon icon-required">Required</span></label>
+                        <input type="text" value="" name="actor" id="actor" class="text long-field" data-aui-validation-field data-aui-validation-required="required" required>
+                        <span class="actorError" style="color: #880000"></span>
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+</body>

@@ -1,0 +1,909 @@
+{{!< layout}}
+<header class="aui-page-header" xmlns="http://www.w3.org/1999/html">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-main intro-header">
+
+            <img border="0" width="15%" style=" vertical-align: middle; margin-bottom: 0.75em; margin-left: 40%; margin-right: auto" src="/images/leanGearsDiscoveryHeaderLogo.png" />
+            <!--<button class="aui-button" style="float: right" title="JIRA PROJECT"><a href="{{hostBaseUrl}}/browse/$projectKey" target="_blank">$project.getName()</a></button>-->
+            <!--<h2>{{title}}</h2>-->
+        </div>
+    </div>
+</header>
+
+<script>
+
+    function printDiv(divName) {
+        window.print(divName);
+    }
+
+    function stopRKey(evt) {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if ((evt.keyCode == 13) && (node.type=="text"))  {return false;}
+    }
+
+    document.onkeypress = stopRKey;
+</script>
+
+<body ng-app="mainModule">
+<div ng-controller="ContinueDiscoveryController">
+    <section role="dialog" id="product-delete-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+        <!-- Dialog header -->
+        <header class="aui-dialog2-header">
+            <!-- The dialog's title -->
+            <h2 class="aui-dialog2-header-main">Delete Discovery Product</h2>
+            <!-- Actions to render on the right of the header -->
+        </header>
+        <!-- Main dialog content -->
+        <div class="aui-dialog2-content">
+
+
+            <form class="aui" action="#" name="jiraform" id="deleteDiscoveryform">
+                <div class="content">
+                    <div class="aui-message aui-message-warning">
+                        <p class="title">
+                            <strong>Are you sure you want to delete your discovery product?</strong>
+                        </p>
+
+                    </div>
+
+
+
+                    <fieldset class="top-label">
+
+                        <div class="field-group top-label">
+
+                            <label for="deleteName">Type DELETE to Confirm<span class="aui-icon icon-required"></span>
+                            </label>
+
+                            <input type="text" value="" name="deleteDiscovery" id="deleteDiscovery" placeholder="Type Delete to Confirm" class="text long-field" data-aui-validation-field data-aui-validation-required="required" required>
+                            <br>
+                            <span class="deleteError" style="color: #880000"></span>
+                        </div>
+
+                    </fieldset>
+
+
+                </div>
+            </form>
+
+
+
+        </div>
+        <!-- Dialog footer -->
+        <footer class="aui-dialog2-footer">
+            <!-- Actions to render on the right of the footer -->
+            <div class="aui-dialog2-footer-actions">
+                <button id="dialog-product-delete" class="aui-button aui-button-primary dialog-product-delete-submit-button">Delete</button>
+                <button id="dialog-delete-product-close-button" class="aui-button aui-button-link ">Cancel</button>
+            </div>
+        </footer>
+    </section>
+    <div class="aui-page-panel aui-page-focused aui-page-focused-large" id = "continueDiscovery">
+
+        <div class ="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+
+                <div class="continueDiscovery">
+
+                    <table class="aui">
+                        <thead>
+                        <tr>
+                            <th id="name">Discovery Product</th>
+                            <th id="type">Owner</th>
+                            <th id="order">Visibility</th>
+
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        {{#each continueDiscovery}}
+                            <tr>
+                                <td headers="name"><a href="" name="productName" ng-click="productDiscovery('{{productName}}')">{{productName}}</a></td>
+
+                                <td headers="name"><a href="">{{user}}</a></td>
+                                <!--<td headers="name"><span id="unclickable-label" class="aui-label" >{{shared}}</span></td>-->
+                                <td><button class=" aui-button dialog-show-button-product-delete"  title="Delete Discovery Product" id ="delete-product" product-id="{{productName}}">Delete</button></td>
+                                <!--<td><button class = "aui-button discoveryTeam "  title="Share Discovery" id ="share-discovery" productName="$product.getProductName()"><span class="aui-icon aui-icon-small aui-iconfont-locked">Card view</span></button></td>-->
+
+                            </tr>
+
+                        {{/each}}
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+        </div>
+    </div>
+
+
+    <div class="aui-page-panel aui-page-focused aui-page-focused-small" id = "productDiscovery" style="display: none" >
+
+
+
+
+
+
+        <nav id="main-nav" class="aui-navgroup aui-navgroup-horizontal">
+            <div class="aui-navgroup-inner">
+                <div class="aui-navgroup-primary">
+                    <ul class="aui-nav">
+
+
+                        <li id="general-nav-item" class="aui-nav-selected"><a href="#" ng-click="productEnvision(user)">Product Envision</a></li>
+
+                        <li id="advanced-nav-item"><a href="#" ng-click="collChart(user)">Collaborative Chartering</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="services" >User Research</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="contact" >User Story Mapping</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="services">User Story Pampering</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="contact">Release Planning</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+                <!--<button class="aui-button" ng-print print-element-id="productVision" style="float: right">Print Product Vision</button>-->
+
+                <div class="nav-content" id="productVision">
+
+                    <div id="image-header" style="margin-bottom: -10px; /*margin-top:-10px*/;">
+                        <img style=" vertical-align: middle; margin-bottom: 0.50em;" src="/images/productEnvision.png" />
+                        <span style="margin-left: 39%; font-size: large"><b>Product Vision</b></span>
+
+                        <a id="clickable-label" class="aui-label" target="_blank" href="{{hostBaseUrl}}/browse/\{{productDiscoveryData[0].projectKey}}" style="font-size: large; vertical-align: middle;float: right; margin-top: 10px">\{{productDiscoveryData[0].productName}}</a>
+
+                    </div>
+                    <div>
+                        <hr>
+                        <button id="print-vision-button" class="aui-button" style ="float: right" onclick="printDiv('envision')" style="float: right">Print Product Vision</button>
+                    </div>
+
+
+                    <section role="dialog"  class="aui-layer aui-dialog2 aui-dialog2-medium product-vision-dialog" aria-hidden="true">
+                        <!-- Dialog header -->
+                        <header class="aui-dialog2-header">
+                            <!-- The dialog's title -->
+                            <h1 class="aui-dialog2-header-main">Edit Product Vision</h1>
+
+                        </header>
+                        <!-- Main dialog content -->
+                        <div class="aui-dialog2-content">
+
+                            <form class="aui" action="#" name="jiraform" id="edit-vision-form">
+
+
+                                <div class="field-group">
+
+                                    <label class="label">Product Name</label>
+
+
+                                    <input class="text" id="editDiscoveryProductName" type="text" name="productName" style="color: grey" value="\{{productDiscoveryData[0].productName}}"  readonly required>
+                                    <span id="result_product"></span>
+
+                                </div>
+                                <div class="field-group">
+                                    <input class="text" type="text" name="endUsers" id = "editEndUsersFirst" value="\{{productDiscoveryData[0].endUsers}}" required>
+                                    <label class="label">End Users</label>
+                                    <div class="description">Example</div>
+                                </div>
+
+
+
+                                <div class="field-group">
+                                    <label for="licenseKey">What problem are they facing today</label>
+                                    <textarea class="textarea" rows="4" cols="10" name="problemsArea" id="editProblemsAreaFirst" value="" required>\{{productDiscoveryData[0].problemsArea}}</textarea>
+                                    <div class="error"></div>
+                                    <div class="description">Example :Spends 30% of their time on road stuck in traffic jam</div>
+                                </div>
+
+
+                                <div class="field-group">
+
+                                    <label class="label">What kind of product is this</label>
+                                    <input class="text" type="text" name="productKind" id="editProductKindFirst" value="\{{productDiscoveryData[0].productKind}}" required>
+                                    <div class="error"></div>
+                                    <div class="description">Example: Mobile App</div>
+                                </div>
+
+
+                                <div class="field-group">
+                                    <label for="d-lname">How do you plan to solve the problem</label>
+                                    <input class="text long-field" type="text" id="editProblemSolutionFirst" name="problemSolution" value="\{{productDiscoveryData[0].problemSoln}}" required>
+                                    <div class="error"></div>
+                                    <div class="description">Example: Educate and enable commuters travel together in car, taxi and auto</div>
+                                </div>
+
+
+                                <div class="field-group">
+                                    <label for="d-lname">Who are your competitors</label>
+                                    <input class="text long-field" type="text" id="editCompetitorsFirst" name="competitors" value="\{{productDiscoveryData[0].competitors}}" required>
+                                    <div class="error"></div>
+                                    <div class="description">Example: traditional way of commuting alone in car, taxi and auto rickshaw</div>
+                                </div>
+
+
+                                <div class="field-group">
+                                    <label for="d-lname">How do you differentiate from your competitors</label>
+                                    <input class="text long-field" type="text" id="editDifferentiatorFirst" name="differentiator" value="\{{productDiscoveryData[0].differentiator}}" required>
+                                    <div class="error"></div>
+                                    <div class="description">Example: addresses the root cause of vehicle density and promotes social responsibility</div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Dialog footer -->
+                        <footer class="aui-dialog2-footer">
+                            <!-- Actions to render on the right of the footer -->
+
+                            <div class="aui-dialog2-footer-actions">
+                                <button class="aui-button aui-button-primary ap-dialog-submit SubmitProductVisionFirst"
+                                        aria-disabled="false" id="">Submit</button>
+                                <button id="" class="aui-button aui-button-link dialog-close-button-product-vision">Cancel</button>
+                            </div>
+                            <!-- Hint text is rendered on the left of the footer -->
+
+                        </footer>
+                    </section>
+                    <div  class="envision" >
+
+                        <span class="aui-icon aui-icon-small aui-iconfont-edit dialog-product-vision-edit-button" style="float: right; cursor: pointer" title="Click to edit product vision"></span>
+                        <p style="text-align: center; font-size: medium">For  <b>\{{productDiscoveryData[0].endUsers}}</b></p>
+                        <p style="text-align: center; font-size: medium">who are <b>\{{productDiscoveryData[0].problemsArea}}</b></p>
+                        <p style="text-align: center; font-size: medium">the <b>\{{productDiscoveryData[0].productName}}</b></p>
+                        <p style="text-align: center; font-size: medium">is a <b>\{{productDiscoveryData[0].productKind}}</b></p>
+                        <p style="text-align: center; font-size: medium">that <b>\{{productDiscoveryData[0].problemSoln}}</b></p>
+                        <p style="text-align: center; font-size: medium">unlike <b>\{{productDiscoveryData[0].competitors}}</b></p>
+                        <p style="text-align: center; font-size: medium">our product <b>\{{productDiscoveryData[0].differentiator}}</b></p>
+
+                    </div>
+
+
+                </div>
+            </section>
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="aui-page-panel aui-page-focused aui-page-focused-small" id = "envision-product" style="display: none" >
+
+
+
+        <nav id="main-nav" class="aui-navgroup aui-navgroup-horizontal">
+            <div class="aui-navgroup-inner">
+                <div class="aui-navgroup-primary">
+                    <ul class="aui-nav">
+
+
+                        <li id="general-nav-item" class="aui-nav-selected"><a href="#" ng-click="productEnvision(user)">Product Envision</a></li>
+
+                        <li id="advanced-nav-item" ><a href="#" ng-click="collChart(user)">Collaborative Chartering</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="services" >User Research</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="contact" >User Story Mapping</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="services">User Story Pampering</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="contact">Release Planning</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+                <div class="nav-content">
+
+                    <div id="image-header" style="margin-bottom: -10px; /*margin-top:-10px*/;">
+                        <img style=" vertical-align: middle; margin-bottom: 0.50em;" src="/images/productEnvision.png" />
+                        <span style="margin-left: 39%; font-size: large"><b>Product Vision</b></span>
+                        <a id="clickable-label" class="aui-label" target="_blank" href="{{hostBaseUrl}}/browse/\{{productDiscoveryData[0].projectKey}}" style="font-size: large; vertical-align: middle;float: right; margin-top: 10px">\{{productDiscoveryData[0].productName}}</a>
+                        <!--<span id="unclickable-label" class="aui-label" style="font-size: large; vertical-align: middle;float: right; margin-top: 10px">\{{productDiscoveryData[0].productName}}</span>-->
+
+                    </div>
+                    <div>
+                        <hr>
+                        <button id="print-vision-button" class="aui-button" style ="float: right" onclick="printDiv('envision')" style="float: right">Print Product Vision</button>
+                    </div>
+
+                    <section role="dialog"  class="aui-layer aui-dialog2 aui-dialog2-large product-vision-dialog" aria-hidden="true">
+                        <!-- Dialog header -->
+                        <header class="aui-dialog2-header">
+                            <!-- The dialog's title -->
+                            <h1 class="aui-dialog2-header-main">Edit Product Vision</h1>
+
+                        </header>
+                        <!-- Main dialog content -->
+                        <div class="aui-dialog2-content">
+
+                            <form class="aui" action="#" name="jiraform" id="edit-vision-form">
+
+
+                                <div class="field-group">
+
+                                    <label class="label">Product Name</label>
+
+
+                                    <input class="text" id="editDiscoveryProductName" type="text" name="productName" style="color: grey" value="\{{productDiscoveryData[0].productName}}"  readonly required>
+                                    <span id="result_product"></span>
+
+                                </div>
+                                <div class="field-group">
+                                    <input class="text" type="text" name="endUsers"  id ="editEndUsers"  value="\{{productDiscoveryData[0].endUsers}}" required>
+                                    <label class="label">End Users</label>
+                                    <div class="description">Example</div>
+                                </div>
+
+
+
+                                <div class="field-group">
+                                    <label for="licenseKey">What problem are they facing today</label>
+                                    <textarea class="textarea" rows="4" cols="10" name="problemsArea" id="editProblemsArea" value="" required>\{{productDiscoveryData[0].problemsArea}}</textarea>
+                                    <div class="error"></div>
+                                    <div class="description">Example :Spends 30% of their time on road stuck in traffic jam</div>
+                                </div>
+
+
+                                <div class="field-group">
+
+                                    <label class="label">What kind of product is this</label>
+                                    <input class="text" type="text" name="productKind" id="editProductKind" value="\{{productDiscoveryData[0].productKind}}" required>
+                                    <div class="error"></div>
+                                    <div class="description">Example: Mobile App</div>
+                                </div>
+
+
+                                <div class="field-group">
+                                    <label for="d-lname">How do you plan to solve the problem</label>
+                                    <input class="text long-field" type="text" id="editProblemSolution" name="problemSolution" value="\{{productDiscoveryData[0].problemSoln}}" required>
+                                    <div class="error"></div>
+                                    <div class="description">Example: Educate and enable commuters travel together in car, taxi and auto</div>
+                                </div>
+
+
+                                <div class="field-group">
+                                    <label for="d-lname">Who are your competitors</label>
+                                    <input class="text long-field" type="text" id="editCompetitors" name="competitors" value="\{{productDiscoveryData[0].competitors}}" required>
+                                    <div class="error"></div>
+                                    <div class="description">Example: traditional way of commuting alone in car, taxi and auto rickshaw</div>
+                                </div>
+
+
+                                <div class="field-group">
+                                    <label for="d-lname">How do you differentiate from your competitors</label>
+                                    <input class="text long-field" type="text" id="editDifferntitaor" name="differentiator" value="\{{productDiscoveryData[0].differentiator}}" required>
+                                    <div class="error"></div>
+                                    <div class="description">Example: addresses the root cause of vehicle density and promotes social responsibility</div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Dialog footer -->
+                        <footer class="aui-dialog2-footer">
+                            <!-- Actions to render on the right of the footer -->
+
+                            <div class="aui-dialog2-footer-actions">
+                                <button class="aui-button aui-button-primary ap-dialog-submit SubmitProductVision"
+                                        aria-disabled="false" id="">Submit</button>
+                                <button id="" class="aui-button aui-button-link dialog-close-button-product-vision">Cancel</button>
+                            </div>
+                            <!-- Hint text is rendered on the left of the footer -->
+
+                        </footer>
+                    </section>
+
+
+                    <div  class="envision">
+
+                        <span class="aui-icon aui-icon-small aui-iconfont-edit dialog-product-vision-edit-button" style="float: right; cursor: pointer" title="Click to edit product vision"></span>
+                        <p style="text-align: center; font-size: medium">For  <b>\{{productDiscoveryData[0].endUsers}}</b></p>
+                        <p style="text-align: center; font-size: medium">who are <b>\{{productDiscoveryData[0].problemsArea}}</b></p>
+                        <p style="text-align: center; font-size: medium">the <b>\{{productDiscoveryData[0].productName}}</b></p>
+                        <p style="text-align: center; font-size: medium">is a <b>\{{productDiscoveryData[0].productKind}}</b></p>
+                        <p style="text-align: center; font-size: medium">that <b>\{{productDiscoveryData[0].problemSoln}}</b></p>
+                        <p style="text-align: center; font-size: medium">unlike <b>\{{productDiscoveryData[0].competitors}}</b></p>
+                        <p style="text-align: center; font-size: medium">our product <b>\{{productDiscoveryData[0].differentiator}}</b></p>
+
+                    </div>
+
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="aui-page-panel aui-page-focused aui-page-focused-small" id = "coll-chart" style="display: none" >
+
+
+
+        <nav id="main-nav" class="aui-navgroup aui-navgroup-horizontal">
+            <div class="aui-navgroup-inner">
+                <div class="aui-navgroup-primary">
+                    <ul class="aui-nav">
+
+
+                        <li id="general-nav-item" ><a href="#" ng-click="productEnvision(user)">Product Envision</a></li>
+
+                        <li id="advanced-nav-item" class="aui-nav-selected"><a href="#" ng-click="collChart(user)">Collaborative Chartering</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="services" >User Research</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="contact" >User Story Mapping</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="services">User Story Pampering</a></li>
+                        <li id="advanced-nav-item"><a href="#" class="contact">Release Planning</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <nav id="coll-chart-nav" class="aui-navgroup aui-navgroup-horizontal">
+            <div class="aui-navgroup-inner">
+                <div class="aui-navgroup-primary">
+                    <div class="admin-menu-links">
+
+                        <ul class="aui-nav">
+                            <!--class="aui-nav-selected"-->
+                            <li id="general-nav-item" class="coll-nav aui-nav-selected"><a href="#" class="discoverProductFeatures" ng-click="discoverProductFeatures(user)">Discover Product Features</a></li>
+                            <li id="advanced-nav-item" class="coll-nav"><a href="#" class="generateProductCanvas" ng-click="generateProductCanvas(user)">Generate Product Canvas</a></li>
+                            <li id="advanced-nav-item" class="coll-nav"><a href="#" class="productCanvas" ng-click="productCanvas(user)">Product Canvas</a></li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <script>
+
+                /*This script is added to change the active tab in coll-chart*/
+                $(document).ready(function(){
+                    $('.coll-nav').on('click', function(){
+                        $(this).siblings().removeClass('aui-nav-selected');
+                        $(this).addClass('aui-nav-selected');
+
+                    });
+                });
+            </script>
+        </nav>
+
+
+        <!--
+
+                    <div class="aui-page-panel" >
+        -->
+
+
+        <div class="aui-page-panel-inner">
+
+
+            <section class="aui-page-panel-content">
+                <div class="nav-content">
+
+
+
+
+                    <div class="tabs-pane discoverProductFeatures"  id="impactMap" role="tabpanel" aria-hidden="false">
+
+                        <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-discoverProductFeatures" spinner-start-active="stop"></span>
+                        <div id="image-header" style="margin-bottom: -10px; margin-top:-10px;">
+                            <img style=" vertical-align: middle; margin-bottom: 0.75em;" src="/images/collaborativeChartering.png" />
+                            <span style="margin-left: 36%; font-size: large"><b>Discover Product Features</b></span>
+                        </div>
+                        <p style="text-align: center; margin-bottom: -5px; margin-top:-10px;">Build the product backlog by adding actors, their behaviours to be changed and product features required to impact the change</p>
+
+                        <hr>
+
+                        <div  class="new-div">
+
+                            <!--<span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-addActor" spinner-start-active="stop"></span>-->
+                            <button id="dialog-show-button-actor" class="aui-button" title="Add Actor" ng-click="addActor()"><span class="aui-icon aui-icon-small aui-iconfont-add">Add</span></button>
+
+                                        <span id="vision-statement"> For  <b>\{{productDiscoveryData[0].endUsers}}</b>
+                                            who are <b>\{{productDiscoveryData[0].problemsArea}}</b>
+                                            the <b>\{{productDiscoveryData[0].productName}}</b>
+                                            is a <b>\{{productDiscoveryData[0].productKind}}</b>
+                                            that <b>\{{productDiscoveryData[0].problemSoln}}</b>
+                                            unlike <b>\{{productDiscoveryData[0].competitors}}</b>
+                                            our product <b>\{{productDiscoveryData[0].differentiator}}</b>
+                                        </span>
+
+                        </div>
+
+
+
+                        <div  ng-repeat="actor in actors" style="margin-left: 46%;">
+
+                            <div create-connections class="actor\{{$index}}" id="actor-div" >
+
+
+                                                            <span><span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-addActivity" spinner-start-active="stop"></span>
+                                                                <button class=" aui-button dialog-show-button-impact div.actor-\{{$index}}"  style="float: left" title="Add Activity"
+                                                                        ng-click="addActivity(actor.id)"><span class="aui-icon aui-icon-small aui-iconfont-add">Add</span>
+                                                                </button>\{{actor.id}}</span>
+
+                                <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-deleteActor" spinner-start-active="stop"></span>
+                                <span class="aui-icon aui-icon-small aui-iconfont-remove dialog-actor-remove-button"  style="float: right" id="div.actor-\{{$index}}" ng-click="deleteActor(actor.id)">Delete Actor</span>
+                                <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-editActor" spinner-start-active="stop"></span>
+                                <span class="aui-icon aui-icon-small aui-iconfont-edit actor-edit-button" style="float: right; cursor: pointer" title="Edit Actor" id="div.actor-\{{$index}}" ng-click="editActor(actor.id)" title="Edit Actor"></span>
+
+
+                                <br/>
+                            </div>
+
+                            <div ng-repeat="activity in activities">
+
+                                <!--\{{$index}}-->
+
+                                <div ng-if="actor.id == activity.id" style="margin-left: -40%;">
+
+                                    <div update-connections style= " "  class="activity\{{$index}}actor\{{actors.indexOf(actor)}}" actor-id="actor\{{actors.indexOf(actor)}}" id="activity-div">
+
+                                                                <span><span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-addFeature" spinner-start-active="stop"></span><button class=" aui-button dialog-show-button-features"  style="float: left" title="Add Activity"
+                                                                                                                                                                                                     id ="div.actor-\{{$index}}"  ng-click="addFeature(actor.id,activity.text)"><span class="aui-icon aui-icon-small aui-iconfont-add">Add</span>
+                                                                </button>\{{activity.text}}</span>
+                                        <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-deleteActivity" spinner-start-active="stop"></span>
+                                        <span class="aui-icon aui-icon-small aui-iconfont-remove dialog-impact-remove-button" ng-click="deleteActivity(actor.id,activity.text)" style="float: right;" title="Delete Activity"></span>
+                                        <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-editActivity" spinner-start-active="stop"></span>
+                                        <span class="aui-icon aui-icon-small aui-iconfont-edit activity-edit-button"  ng-click="editActivity(actor.id,activity.text)"  style="float: right; cursor: pointer" title="Edit Activity"></span>
+                                    </div>
+
+                                    <div ng-repeat="feature in features">
+
+                                        <div ng-if="actor.id == feature.id && activity.text == feature.key" style="margin-left: -25%;">
+
+                                            <div feature-connection style=""  class="feature\{{$index}}" activity-id="activity\{{activities.indexOf(activity)}}actor\{{actors.indexOf(actor)}}" id="feature-div">
+                                                <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-deleteFeature" spinner-start-active="stop"></span>
+                                                <span class="aui-icon aui-icon-small aui-iconfont-remove dialog-deliverable-remove-button" ng-click="deleteFeature(actor.id,activity.text, feature.text)" style="float: right;" title="Delete Feature"></span>
+
+                                                <span>\{{feature.text}}<button class="aui-button aui-button-link"  title="ISSUE ID"><a href="{{hostBaseUrl}}/browse/\{{feature.issueId}}" target="_blank">\{{feature.issueId}}</a></button></span>
+
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div  class="tab-pane generateProductCanvas" id="generateProductCanvas" role="tabpanel" style="display: none">
+                        <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-generateProductCanvas" spinner-start-active="stop"></span>
+                        <div id="image-header" style="margin-bottom: -10px; margin-top:-10px;">
+                            <img style=" vertical-align: middle; margin-bottom: 0.75em;" src="/images/collaborativeChartering.png" />
+                            <span style="margin-left: 36%; font-size: large"><b>Generate Product Canvas</b></span>
+                        </div>
+                        <p style="text-align: center; margin-bottom: -5px; margin-top:-10px;">Select the actors and associated impacts you want to focus on first from impact map</p>
+
+                        <hr>
+
+                        <div ng-if="hypothesis" >
+                            <!--<span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-editHyothesis" spinner-start-active="stop"></span>-->
+                            <button class="aui-button" resolved="" id ="edit-hypothesis-goal" ng-click="editHypothesis()" style="float: left"><span class="aui-icon aui-icon-small aui-iconfont-view-table"></span> \{{editHypothesisButton}}</button>
+                        </div>
+
+                        <div ng-if="!hypothesis">
+                            <!--<span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-generateHyothesis" spinner-start-active="stop"></span>-->
+                            <button class="aui-button" resolved="" id ="generate-hypothesis-goal" ng-click="generateHypothesis()" style="float: left"><span class="aui-icon aui-icon-small aui-iconfont-view-table"></span> \{{hypothesisButton}}</button>
+                        </div>
+
+
+                        <div ng-show="targetGroup.length > defaultTargetGroup.length"><!--Donot bind to a primitive value-->
+
+                            <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-1" spinner-start-active="stop"></span>
+                            <button class="aui-button generate-canvas-button" resolved="" id ="regenerate-canvas-button"  style="float: right"><span class="aui-icon aui-icon-small aui-iconfont-approve"></span> ReGenerate Product Canvas</button>
+                        </div>
+
+                        <div ng-show="targetGroup.length == defaultTargetGroup.length">
+                            <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-1" spinner-start-active="stop"></span>
+                            <button class="aui-button generate-canvas-button" resolved="" id ="generate-canvas-button"  style="float: right"><span class="aui-icon aui-icon-small aui-iconfont-approve"></span> Generate Product Canvas</button>
+                        </div>
+
+
+                        <section role="dialog" id="hypothesis-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+                            <!-- Dialog header -->
+                            <header class="aui-dialog2-header">
+                                <!-- The dialog's title -->
+                                <h3 class="aui-dialog2-header-main" style="overflow: visible; ">What is the business hypothesis you want to test in this release?</h3>
+                            </header>
+                            <!-- Main dialog content -->
+
+
+
+
+                            <div class="aui-dialog2-content">
+
+                                <form class="aui actorform" action="#" name="jiraform" id="actorform">
+
+
+                                    <div class="content">
+                                        <div class="field-group">
+                                            <label for="licenseKey">Business Hypothesis</label>
+                                            <textarea class="textarea" rows="4" cols="12" name="hypothesis" id="hypothesis"  required></textarea>
+                                            <br>
+                                            <span class = "hypothesis-error" style="color: #880000"></span>
+
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Dialog footer -->
+                            <footer class="aui-dialog2-footer">
+                                <!-- Actions to render on the right of the footer -->
+
+                                <div class="aui-dialog2-footer-actions">
+                                    <button class="aui-button aui-button-primary hypotheis-dialog-submit"
+                                            aria-disabled="false" id="hypotheis-dialog-submit">Submit</button>
+                                    <button id="dialog-hypothesis-close-button" class="aui-button aui-button-link">Cancel</button>
+                                </div>
+                                <!-- Hint text is rendered on the left of the footer -->
+
+                            </footer>
+                        </section>
+
+                        <section role="dialog" id="hypothesis-edit-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+                            <!-- Dialog header -->
+                            <header class="aui-dialog2-header">
+                                <!-- The dialog's title -->
+                                <h3 class="aui-dialog2-header-main" style="overflow: visible; ">What is the business hypothesis you want to test in this release?</h3>
+                            </header>
+                            <!-- Main dialog content -->
+
+
+
+
+                            <div class="aui-dialog2-content">
+
+                                <form class="aui actorform" action="#" name="jiraform" id="actorform">
+
+
+                                    <div class="content">
+                                        <div class="field-group">
+                                            <label for="licenseKey">Business Hypothesis</label>
+                                            <textarea class="textarea" rows="4" cols="12" name="edit-hypothesis" id="edit-hypothesis"  required>\{{hypothesis}}</textarea>
+                                            <br>
+                                            <span class = "hypothesis-error" style="color: #880000"></span>
+
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Dialog footer -->
+                            <footer class="aui-dialog2-footer">
+                                <!-- Actions to render on the right of the footer -->
+
+                                <div class="aui-dialog2-footer-actions">
+                                    <button class="aui-button aui-button-primary edit-hypothesis-dialog-submit"
+                                            aria-disabled="false" id="edit-hypothesis-dialog-submit">Submit</button>
+                                    <button id="edit-dialog-hypothesis-close-button" class="aui-button aui-button-link">Cancel</button>
+                                </div>
+                                <!-- Hint text is rendered on the left of the footer -->
+
+                            </footer>
+                        </section>
+                        <h2 style="text-align: center;margin-bottom: 20px">Impact Map</h2>
+                        <hr>
+
+
+                        <div  class="new-div" style="top:68%">
+
+                                        <span id="vision-statement"> For  <b>\{{productDiscoveryData[0].endUsers}}</b>
+                                            who are <b>\{{productDiscoveryData[0].problemsArea}}</b>
+                                            the <b>\{{productDiscoveryData[0].productName}}</b>
+                                            is a <b>\{{productDiscoveryData[0].productKind}}</b>
+                                            that <b>\{{productDiscoveryData[0].problemSoln}}</b>
+                                            unlike <b>\{{productDiscoveryData[0].competitors}}</b>
+                                            our product <b>\{{productDiscoveryData[0].differentiator}}</b>
+                                        </span>
+
+                        </div>
+
+                        <div all-checkboxes-broadcast>
+
+                            <div  ng-repeat="actor in actors" style="margin-left: 46%;" >
+
+                                <div  create-connections class="actor\{{$index}}" id="actor-div">
+
+                                    <span><input class="checkbox-actor" type="checkbox" name="actor-checkbox" ng-model="actor.checked" id="actor-checkbox\{{$index}}" data ="actor-checkbox\{{$index}}" ng-change="checkAll(actor.checked,$index)" value="\{{actor.id}}">\{{actor.id}}</span>
+
+                                    <br/>
+                                </div>
+
+
+
+                                <div activity-checkboxes-broadcast ng-repeat="activity in activities">
+
+                                    <!--\{{$index}}-->
+
+                                    <div ng-if="actor.id == activity.id" style="margin-left: -40%;">
+
+                                        <div  update-connections all-checkboxes-listeners  id="activity-div"  class="activity\{{$index}}actor\{{actors.indexOf(actor)}}" activity-id="activity\{{$index}}actor\{{actors.indexOf(actor)}}" actor-id="actor\{{actors.indexOf(actor)}}" id="">
+
+                                            <span><input class="checkbox-activity" type="checkbox" name="activity-checkbox" ng-model="activity.checked" id="activity-checkbox\{{$index}}actor\{{actors.indexOf(actor)}}" ng-change="checkAll(activity.checked,$index,actors.indexOf(actor))" value="\{{actor.id}},\{{activity.text}}" check-box>\{{activity.text}}</span>
+
+                                        </div>
+
+                                        <div ng-repeat="feature in features">
+
+                                            <div ng-if="actor.id == feature.id && activity.text == feature.key" style="margin-left: -25%;">
+
+                                                <div feature-connection feature-checkboxes-listeners feature-checkboxes-listeners-activity  id="feature-div"  class="feature\{{$index}}" activity-id="activity\{{activities.indexOf(activity)}}actor\{{actors.indexOf(actor)}}" checkbox-activity-id="activity\{{activities.indexOf(activity)}}-actor\{{actors.indexOf(actor)}}" id="">
+
+                                                    <span><input class="checkbox" type="checkbox" name="feature-checkbox" ng-model="feature.checked" id="feature\{{$index}}activity\{{activities.indexOf(activity)}}actor\{{actors.indexOf(actor)}}" value="\{{actor.id}},\{{activity.text}},\{{feature.text}}" check-box >\{{feature.text}}</span>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tab-pane productCanvas" id="productCanvas" role="tabpanel" style="display: none">
+                        <span us-spinner="{radius:10, width:2, length: 8}" spinner-key="spinner-productCanvas" spinner-start-active="stop"></span>
+
+                        <div id="image-header" style="margin-bottom: -10px; margin-top:-10px;">
+                            <img style=" vertical-align: middle; margin-bottom: 0.75em;" src="/images/collaborativeChartering.png" />
+                            <span style="margin-left: 36%; font-size: large"><b>Product Canvas</b></span>
+                            <button id="print-canvas-button" class="aui-button" style ="float: right" onclick="printDiv('productCanvas')" style="float: right">Print Canvas</button>
+                        </div>
+
+                        <hr>
+
+
+                        <div  class="prod-vison-statement" >
+
+                            <div class="aui-page-header-main"><h3>Vision Statement</h3></div>
+
+                            <hr>
+                                        <span id="vision-statement"> For  <b>\{{productDiscoveryData[0].endUsers}}</b>
+                                            who are <b>\{{productDiscoveryData[0].problemsArea}}</b>
+                                            the <b>\{{productDiscoveryData[0].productName}}</b>
+                                            is a <b>\{{productDiscoveryData[0].productKind}}</b>
+                                            that <b>\{{productDiscoveryData[0].problemSoln}}</b>
+                                            unlike <b>\{{productDiscoveryData[0].competitors}}</b>
+                                            our product <b>\{{productDiscoveryData[0].differentiator}}</b>
+                                        </span>
+
+                        </div>
+
+
+                        <div class="prod-vison-statement">
+                            <div class="aui-page-header-main"><h3>Business Hypothesis goal</h3></div>
+
+                            <hr>
+
+                            <span style="word-wrap: break-word;">\{{hypothesis}} </span>
+                        </div>
+
+
+                        <div id="targetgroup" style="display:inline-block; width:calc(99% / 3);">
+                            <h2 style="text-align:center;">Targeted Users</h2>
+                            <hr>
+
+                            <circle-spinner ng-show="prograssing1"></circle-spinner>
+
+                            <table class="" id="targetgroup_table" style="margin-top: 10px; border-collapse:separate;width: 100%">
+                                <tbody id="targetgroup_table">
+
+                                <tr class="product-discovery-big-picture"  data-key="" ng-repeat="actor in targetGroup">
+
+                                    <td class="product-canvas-td"><span class="name" style="text-align: center">\{{actor}}</span>
+
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                        <div id="bigpicture" style="display:inline-block; width:calc(99% / 3);">
+                            <h2 style="text-align:center">Target User Activities</h2>
+                            <hr>
+                            <circle-spinner ng-show="prograssing2"></circle-spinner>
+
+                            <table class="" id="bigpicture_table" style="margin-top: 10px;border-collapse:separate;width: 100%">
+                                <tbody id="targetgroup_table">
+                                <tr class="product-discovery-big-picture" data-key="" ng-repeat="userActivity in bigPicture" >
+                                    <td class="product-canvas-td"><span class="name">\{{userActivity.key}}</span>
+                                        <span id="unclickable-label" class="aui-label" >\{{userActivity.id}}</span>
+
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                        <div id="productdetails" style="display:inline-block; width:calc(99% / 3);">
+
+                            <h2 style="text-align:center">Product Features to Support User Activities</h2>
+
+                            <hr>
+                            <circle-spinner ng-show="prograssing3"></circle-spinner>
+
+
+                            <table class="" id="bigpicture_table" style="margin-top: 10px;border-collapse:separate; width: 100%">
+                                <tbody id="targetgroup_table">
+
+                                <tr class="product-discovery-big-picture" data-key="" >
+
+                                <tr class="product-discovery-big-picture" data-key="" ng-repeat="productDetail in productDetails">
+
+
+
+                                    <td class="product-canvas-td"><span class="name" >\{{productDetail.key}}</span><span id="unclickable-label" class="aui-label">\{{productDetail.id}}</span>
+
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+        </div>
+        <!--</div>-->
+
+    </div>
+
+
+</div>
+</body>
+
+
+
+<!--
+
+<p ng-hide="active">Please click a menu item</p>
+<p ng-show="active">You chose <b>\{{active}}</b></p>
+-->
+

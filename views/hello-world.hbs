@@ -1,0 +1,229 @@
+{{!< layout}}
+<header class="aui-page-header">
+  <div class="aui-page-header-inner">
+    <div class="aui-page-header-main intro-header">
+      <h1>Hello World!</h1>
+
+      <p class="subtitle">Welcome to {{title}}</p>
+    </div>
+  </div>
+</header>
+
+
+<body ng-app="mainModule">
+
+<div class="aui-page-panel main-panel">
+    <div class="aui-page-panel-inner" id="hello-world">
+        <section class="aui-page-panel-item">
+            <div class="aui-group">
+                <div class="aui-item">
+                    <p>
+                        Congratulations. You've successfully created an Atlassian Connect add-on using the
+                        <a href="https://bitbucket.org/atlassian/atlassian-connect-express/src/master/README.md#markdown-header-atlassian-connect-express-nodejs-package-for-express-based-atlassian-add-ons" target="_parent">atlassian-connect-express</a>
+                        client library.
+                    </p>
+                    <p>
+                        <a class="aui-button aui-button-primary" href="https://bitbucket.org/atlassian/atlassian-connect-express/src/master/README.md#markdown-header-atlassian-connect-express-nodejs-package-for-express-based-atlassian-add-ons" target="_parent">
+                            Get Started
+                            <span class="aui-icon aui-icon-small aui-iconfont-devtools-arrow-right">Arrow right</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+{{!< layout}}
+<header class="aui-page-header">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-main intro-header">
+            <h1>Hello World!</h1>
+
+            <p class="subtitle">Welcome to {{title}}</p>
+        </div>
+    </div>
+</header>
+
+
+
+{{!< layout}}
+<header class="aui-page-header">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-main intro-header">
+            <h1>Hello World!</h1>
+
+            <p class="subtitle">Welcome to {{title}}</p>
+        </div>
+    </div>
+</header>
+
+
+<body ng-app="mainModule">
+<!--
+
+<div class="aui-page-panel main-panel">
+    <div class="aui-page-panel-inner" id="hello-world">
+        <section class="aui-page-panel-item" style="z-index: 10;">
+            <div class="aui-group">
+                <div class="aui-item">
+                    <p>
+                        Congratulations. You've successfully created an Atlassian Connect add-on using the
+                        <a href="https://bitbucket.org/atlassian/atlassian-connect-express/src/master/README.md#markdown-header-atlassian-connect-express-nodejs-package-for-express-based-atlassian-add-ons" target="_parent">atlassian-connect-express</a>
+                        client library.
+                    </p>
+                    <p>
+                        <a class="aui-button aui-button-primary" href="https://bitbucket.org/atlassian/atlassian-connect-express/src/master/README.md#markdown-header-atlassian-connect-express-nodejs-package-for-express-based-atlassian-add-ons" target="_parent">
+                            Get Started
+                            <span class="aui-icon aui-icon-small aui-iconfont-devtools-arrow-right">Arrow right</span>
+                        </a>
+                    </p>
+
+
+
+                    <div class='styles'>
+                        Yeh mera hai
+                    </div>
+
+
+                    <div class='positioning'>
+                        Dynamic repositioning is optional. Update strategies are not constrained by the plugin. Ideas:
+                    </div>
+
+                    <div class="new-div">
+                        Connections are separate elements that can be styled individually. Examples:
+
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+-->
+
+
+
+<script>
+    $(document).ready(function() {
+        $('h1 *').connections({ to: 'div:first', 'class': 'first' });/*
+        $('div.styles .anchor').connections({ to: 'div.styles li:nth-child(1)', within: '.styles', tag: 'inner', css: { zIndex: -1 } });
+        $('div.styles .anchor').connections({ to: 'div.styles li:nth-child(2)', within: '.styles', tag: 'inner', css: { color: '#d62' } });
+        $('div.styles .anchor').connections({ to: 'div.styles li:nth-child(3)', within: '.styles', tag: 'inner', css: { borderWidth: 0.5 } });
+        $('div.styles .anchor').connections({ to: 'div.styles li:nth-child(4)', within: '.styles', tag: 'inner', css: { borderRadius: 0 } });
+        $('div.styles .anchor').connections({ to: 'div.styles li:nth-child(5)', within: '.styles', tag: 'inner', css: { borderStyle: 'double' } });*/
+        $('div.positioning .anchor').connections({ to: 'div.positioning li', tag: 'inner' });
+        $('div.new-div, div.styles').connections();
+        $('div.new-div, div.positioning').connections();
+        $('connection:odd').addClass('odd');
+        var connections = $('connection, inner');
+        setInterval(function() { connections.connections('update') }, 100);
+    });
+</script>
+
+<style>
+
+    .aui-navgroup-horizontal .aui-nav > .aui-nav-selected a:before,
+    .aui-navgroup-horizontal .aui-nav > .aui-nav-selected a:after {
+        position: fixed;
+    }
+
+
+    p, div.styles, div.new-div ,  div.positioning, div.more{
+        background: rgb(255, 255, 255);
+        background: rgba(255, 255, 255, 0.7);
+        float: left;
+        min-width: 4em;
+        min-height: 3em;
+        max-width: 29ex;
+        margin: 3em;
+        padding: 1em;
+        border: 1px solid rgb(200, 200, 200);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
+        box-shadow: 2px 5px 5px rgba(0,0,0,0.2);
+    }
+    pre {
+        font: 0.9em monospace;
+        font-weight: bold;
+        background: #ddd;
+        color: #555;
+    }
+
+    /*connection {
+        /!*z-index: 5;*!/
+        border: 3px solid;
+        border-radius: 7em;
+        color: rgb(128, 128, 128);
+        color: rgba(0, 0, 0, 0.5);
+    }
+    connection.odd {
+        border-radius: 100%;
+    }
+    connection.first {
+        color: black;
+        border: 5px dotted;
+    }
+    inner {
+        border: 4px solid;
+        border-radius: 16px;
+        color: #668;
+    }*/
+    .anchor {
+        display: block;
+        width: 0;
+        margin-top: 0.1em;
+        margin-left: 1em;
+    }
+    .more {
+        float: right;
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="aui-tabs horizontal-tabs" role="application">
+    <ul class="tabs-menu" role="tablist">
+        <li class="menu-item active-tab" role="presentation">
+            <a href="#tabs-example-first" id="aui-uid-0-1436371221001" role="tab" aria-selected="true"><strong>Tab 1</strong></a>
+        </li>
+        <li class="menu-item" role="presentation">
+            <a href="#tabs-example-second" id="aui-uid-1-1436371221001" role="tab" aria-selected="false"><strong>Tab 2</strong></a>
+        </li>
+    </ul>
+    <div class="tabs-pane active-pane" id="tabs-example-first" role="tabpanel" aria-hidden="false">
+        <h2>This is Tab 1</h2>
+
+
+
+        <div class='styles'>
+            Connections are separate elements that can be styled individually. Examples:
+        </div>
+
+        <br />
+        <div class='positioning'>
+            Dynamic repositioning is optional. Update strategies are not constrained by the plugin. Ideas:
+
+        </div>
+
+        <div class="new-div">
+            Connections are separate elements that can be styled individually. Examples:
+            #*<span id="myspan">For <b>$endUsers</b> who<b>$problemsArea <b> is a <b>$productKind</b> that <b>$problemSoln</b> unlike </b>$differntitaor</b> our product <b>$prod</b> </span>*#
+        </div>
+
+
+        <div style="clear: both;"></div>
+
+    </div>
+    <div class="tabs-pane" id="tabs-example-second" role="tabpanel" aria-hidden="true">
+        <h2>This is Tab 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+</div>
+
+
+</body>
+
+

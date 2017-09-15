@@ -1,0 +1,26 @@
+{{!< layout}}
+
+
+<body ng-app="mainModule" class="">
+<div ng-controller="AdminConfigController">
+    <div class="aui-page-panel aui-page-focused aui-page-focused-small" id = "continueDiscovery">
+        <div class ="aui-page-panel-inner">
+            <section class="aui-page-panel-content" >
+                <label>Use User Story template while creating JIRA issue for Product features?</label>
+                <div ng-repeat="eval in getEvaluators()">
+                    <label class="radio" >
+                        <input type="radio" ng-model="template" ng-click ="setConfig(template)" name="evaluatorOptions" value="\{{eval.name}}">\{{eval.name}}
+                    </label>
+                </div>
+                <hr />
+                <!--<div>You picked: \{{cell.evaluator}}\{{template}}</div>-->
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>

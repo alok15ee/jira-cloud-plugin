@@ -1,0 +1,66 @@
+{{!< layout}}
+
+
+<body style="background:white">
+
+<div class="aui-dialog2-content">
+    <script>
+
+        $(function(){
+
+            AP.require('events', function(events){
+                events.on('loadDyamicParams', function(param1, param2){
+                    events.offAll('setFeedbackToDelete');
+                    // use the param1, param2, param3 as needed in this handler function
+                    $('#actor-span').text(param1);
+                    $('#activity-span').text(param2);
+                });
+                events.emit('getDynamicParams');
+            });
+
+            AP.require('dialog', function(dialog) {
+                dialog.getButton('submit').bind(function() {
+
+                    AP.require('events', function(events){
+                        var feature = $('#feature').val();
+
+                        if(!feature.trim()){
+                            $('.featureError').html("Feature cannot be empty");
+                            return;
+                        }
+                        events.emit('customEvent', feature);
+                        dialog.close();
+                    });
+
+                });
+                dialog.getButton('cancel').bind(function () {
+                    dialog.close();
+                });
+            });
+
+
+
+        });
+
+    </script>
+
+    <div>
+        What feature should be added to the product to help <b><span id="actor-span" style="color: green;"> </span></b>  to  <b><span id="activity-span" style="color: green; word-break: break-all"> </span></b>?
+    </div>
+
+    <form class="aui" action="#" name="jiraform" id="deliverable-form">
+        <div class="content">
+            <div class="field-group">
+                <label for="summary">Feature<span class="aui-icon icon-required">Required</span></label>
+                <input type="text" value="" name="feature" id="feature" class="text long-field" required>
+                <span class="featureError" style="color: #880000"></span>
+            </div>
+
+        </div>
+
+
+    </form>
+
+</div>
+
+</body>

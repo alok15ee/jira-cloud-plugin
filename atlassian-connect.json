@@ -1,0 +1,209 @@
+{
+  "key": "leanGears-Discovery",
+  "name": "leanGears Discovery",
+  "description": "Cloud Plugin for JIRA",
+  "vendor": {
+    "name": "",
+    "url": ""
+  },
+  "icon": {
+  "width": 16,
+  "height": 16,
+  "url": "/images/pluginIcon.png"
+},
+  "imagePlaceholder": {
+    "url": "/images/pluginIcon.png"
+  },
+  "baseUrl": "{{localBaseUrl}}",
+  "enableLicensing": true,
+  "links": {
+    "self": "{{localBaseUrl}}/atlassian-connect.json",
+    "homepage": "{{localBaseUrl}}/atlassian-connect.json"
+  },
+  "authentication": {
+    "type": "jwt"
+  },
+  "lifecycle": {
+    "installed": "/installed"
+  },
+  "scopes": [
+    "READ",
+    "WRITE",
+    "ADMIN"
+  ],
+  "modules": {
+    "webSections": [
+      {
+        "location": "lenGears-Discovery",
+        "weight": 50,
+        "key": "lenGears-Discovery-Section",
+        "name": {
+          "value": "Discovery Menu"
+        }
+      },
+      {
+        "location": "admin_plugins_menu",
+        "weight": 50,
+        "key": "discovery-config-Section",
+        "name": {
+          "value": "leanGears Discovery"
+        }
+      }
+
+    ],
+    "webItems": [
+      {
+        "url": "/leanGearsDiscovery",
+        "location": "system.top.navigation.bar",
+        "context": "addon",
+        "weight": 200,
+        "styleClasses": [
+          "webitem",
+          "system-present-webitem"
+        ],
+        "tooltip": {
+          "value": "leanGears Discovery"
+        },
+        "icon": {
+          "width": 16,
+          "height": 16,
+          "url": "/maps/icon.png"
+        },
+        "key": "lenGears-Discovery",
+        "name": {
+          "value": "Discovery"
+        }
+      }
+    ],
+    "generalPages": [
+      {
+        "key": "startDiscovery",
+        "name": {
+          "value": "Start Discovery"
+        },
+        "url": "/startDiscovery",
+        "location": "lenGears-Discovery/lenGears-Discovery-Section",
+        "conditions": [
+          {
+            "and": [
+              {
+                "or": [
+                  {
+                    "condition": "user_is_admin",
+                    "invert": false
+                  },
+                  {
+                    "condition": "user_is_sysadmin",
+                    "invert": false
+                  }
+                ]
+              },
+              {
+                "condition": "user_is_logged_in",
+                "invert": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "continueDiscovery",
+        "name": {
+          "value": "Continue Discovery"
+        },
+        "url": "/continueDiscovery",
+        "location": "lenGears-Discovery/lenGears-Discovery-Section",
+        "conditions": [
+          {
+            "condition": "user_is_logged_in"
+          }
+        ]
+      },
+
+      {
+        "url": "/dialogActor.html",
+        "key": "actor-content",
+        "name": {
+          "value": "Add actor dialog"
+        },
+        "location":"hidden"
+      },
+      {
+        "url": "/dialogActivity.html",
+        "key": "activity-content",
+        "name": {
+          "value": "Add activity dialog"
+        },
+        "location":"hidden"
+      },
+      {
+        "url": "/dialogFeature.html",
+        "key": "feature-content",
+        "name": {
+          "value": "Add feature dialog"
+        },
+        "location":"hidden"
+      },
+      {
+        "url": "/editActivityDialog.html",
+        "key": "edit-activity-content",
+        "name": {
+          "value": "Edit Activity dialog"
+        },
+        "location":"hidden"
+      },
+
+      {
+        "url": "/editActorDialog.html",
+        "key": "edit-actor-content",
+        "name": {
+          "value": "Edit Actor dialog"
+        },
+        "location":"hidden"
+      },
+
+      {
+        "url": "/deleteActorDialog.html",
+        "key": "delete-actor-content",
+        "name": {
+          "value": "Delete dialog"
+        },
+        "location":"hidden"
+      },
+      {
+        "url": "/deleteActivityDialog.html",
+        "key": "delete-activity-content",
+        "name": {
+          "value": "Delete dialog"
+        },
+        "location":"hidden"
+      },
+      {
+        "url": "/deleteFeatureDialog.html",
+        "key": "delete-feature-content",
+        "name": {
+          "value": "Delete dialog"
+        },
+        "location":"hidden"
+      },
+      {
+        "url": "/previewVisionDialog.html",
+        "key": "preview-vision-dialog",
+        "name": {
+          "value": "Preview Vision dialog"
+        },
+        "location":"hidden"
+      }
+    ],
+    "adminPages": [
+      {
+        "url": "/admin-config",
+        "location": "admin_plugins_menu/discovery-config-Section",
+        "key": "discoveryConfigSection",
+        "name": {
+          "value": "Discovery Configuration"
+        }
+      }
+    ]
+  }
+}

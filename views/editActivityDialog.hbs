@@ -1,0 +1,63 @@
+{{!< layout}}
+
+
+<body style="background:white">
+
+<div class="aui-dialog2-content">
+    <script>
+
+        $(function(){
+
+
+            AP.require('events', function(events){
+                events.on('loadDyamicParams', function(param1){
+                    events.offAll('setFeedbackToDelete');
+                    // use the param1, param2, param3 as needed in this handler function
+                    value = document.getElementById("activity");
+                    value.value = param1;
+                });
+                events.emit('getDynamicParams');
+            });
+
+            AP.require('dialog', function(dialog) {
+                dialog.getButton('submit').bind(function() {
+
+                    AP.require('events', function(events){
+                        var activity = $('#activity').val();
+                        if(!activity.trim()){
+                            $('.activityError').html("Activity Cannot be empty");
+                            return;
+                        }
+                        events.emit('customEvent', activity);
+                        dialog.close();
+                    });
+                    //return true;
+                    //dialog.close();
+                });
+
+                dialog.getButton('cancel').bind(function () {
+                    dialog.close();
+                });
+            });
+
+        });
+
+    </script>
+
+
+    <form class="aui" action="#" name="impacteditform">
+        <div class="content">
+
+            <div class="field-group">
+                <label for="summary">Activity Name<span class="aui-icon icon-required">Required</span></label>
+                <input type="text" value="" name="activity" id="activity" class="text long-field">
+                <span class="activityError" style="color: #880000"></span>
+            </div>
+
+        </div>
+    </form>
+
+
+</div>
+
+</body>

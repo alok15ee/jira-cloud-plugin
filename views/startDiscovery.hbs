@@ -1,0 +1,287 @@
+{{!< layout}}
+<header class="aui-page-header">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-main intro-header">
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+</header>
+
+
+<body ng-app="mainModule" class="">
+
+
+<!--<div class="aui-page-focused" ng-controller="demo">Change from demo-->
+<div ng-controller="demo">
+
+    <div class="aui-page-panel aui-page-focused aui-page-focused-small" id="startDiscovery">
+        <div class ="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+
+                <h2>Create a Discovery Project</h2>
+
+                <form class="aui">
+
+                    <fieldset class="group">
+
+                        <div class="radio">
+                            <input class="radio" type="radio"
+                                   id="radioButtonOne" ng-model="result" ng-value='"YES"' name="userDiscoveryOption">
+                            <label for="radioButtonOne">New Discovery</label>
+                            <div class="description">Start Discovering requirements for a new project [Creates a new JIRA Project]</div>
+                        </div>
+                        <div class="radio">
+                            <input class="radio" type="radio"
+                                   ng-model="result" id="radioButtonTwo" ng-value='"NO"' name="userDiscoveryOption" >
+                            <label for="radioButtonTwo">New discovery with an existing project</label>
+                            <div class="description">Start Discovering requirements for an already existing JIRA Project</div>
+                        </div>
+
+                    </fieldset>
+
+
+                    <div class="buttons-container">
+                        <div class="buttons">
+
+                            <button class="aui-button aui-button-primary ap-dialog-submit newDisc"
+                                    ng-click="doClick(result)"  aria-disabled="false" id="newDissc">Next</button>
+                            <!--<a  class="cancel" href="/startDiscovery" id="schedule-issue-cancel" >Cancel</a>-->
+
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- <form ng-submit="doSubmit()">
+             <button type="button" ng-click="doClick()">click</button>
+             <button type="submit">submit</button>
+         </form>-->
+    </div>
+    <div class="aui-page-panel aui-page-focused aui-page-focused-large"  id="createNewDiscoveryForm" style="display: none" >
+        <div class ="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+
+                <h2>Create Your Vision Statement</h2>
+
+                <form class="aui newDiscoveryForm" name="newDiscoveryForm" novalidate>
+                    <span us-spinner="{radius:12, width:6, length: 10}"></span>
+
+                    <fieldset class="group">
+
+
+                        <div class="field-group">
+
+                            <label class="label">Product Name</label>
+                            <input class="text" type="text" name="productname" ng-model="user.productName" placeholder="This is the Name of the product" unique-productname="" value="" required/>
+                            <p ng-show="newDiscoveryForm.productname.$invalid && !newDiscoveryForm.productname.$pristine" style="color: #880000">Product name is required.</p>
+                            <span class="hide-while-in-focus" ng-show="newDiscoveryForm.productname.$error.unique" style="color: #880000">Discovery Product exists. Choose a different name</span>
+
+                        </div>
+
+                        <!--<div class="field-group aui-select2-userpicker">
+                            <label for="my-user-picker">Discoverer</label>
+                            <input type="text" id="my-user-picker"  ng-model="user.jiraUser" placeholder="Who is starting this discovery" class="text long-field" data-placeholder="Select a Discoverer">
+                            <p ng-show="newDiscoveryFormExisting.discoverer.$invalid && !newDiscoveryFormExisting.discoverer.$pristine" style="color: #880000">Discoverer is required.</p>
+                        </div>-->
+                        <div class="field-group aui-select2-userpicker">
+                            <label for="my-user-picker">Discoverer</label>
+                            <input type="text" id="my-user-picker"  name="user-discoverer" ng-model="user.jiraUser" class="text long-field" data-placeholder="Select a Discoverer" required/>
+                            <p ng-show="newDiscoveryForm.user-discoverer.$invalid && !newDiscoveryForm.user-discoverer.$pristine" style="color: #880000">Discoverer is required</p>
+                        </div>
+
+                        <div class="field-group">
+                            <input class="text" type="text" name="input2" ng-model="user.endUsers" placeholder="These are the People/Audience who will actually use your product" value="" required/>
+                            <p ng-show="newDiscoveryForm.input2.$invalid && !newDiscoveryForm.input2.$pristine" style="color: #880000">EndUsers required.</p>
+                            <label class="label">Who are end users</label>
+                            <div class="description">[Gamers, Engineers, Commuters, Media, Goverment]</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="licenseKey">What Problem Are They Facing Today</label>
+                            <textarea class="textarea" rows="4" cols="10" name="input3" ng-model="user.problemsArea" placeholder="This is the Statement of Need. List the problems that your end users are facing and you are trying to solve" id="problemsarea" value="" required></textarea>
+                            <p ng-show="newDiscoveryForm.input3.$invalid && !newDiscoveryForm.input3.$pristine" style="color: #880000">ProblemsArea required.</p>
+                            <div class="description">Spend So much in .....</div>
+                        </div>
+
+                        <div class="field-group">
+
+                            <label class="label">What kind of product is this</label>
+                            <input class="text" type="text" name="input4" ng-model="user.productKind" placeholder="This is the Type of your Product" id="productkind" value="" required/>
+                            <p ng-show="newDiscoveryForm.input4.$invalid && !newDiscoveryForm.input4.$pristine" style="color: #880000">ProductKind required.</p>
+                            <div class="description">[Software, MobileApp, JIRA-Plugin]</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="d-lname">How do you plan to solve the problem</label>
+                            <input class="text long-field" type="text" id="problemSoln" placeholder="This is your approach for solving the user's problem's" name="input5" ng-model="user.problemSoln" value="" required />
+                            <p ng-show="newDiscoveryForm.input5.$invalid && !newDiscoveryForm.input5.$pristine" style="color: #880000">ProblemSolution required.</p>
+                            <div class="error"></div>
+                            <div class="description">[Load Balancing of Personal, Automated Traffic Info]</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="d-lname">Who are your competitors</label>
+                            <input class="text long-field" type="text" id="competitors" placeholder="This could be anything that is a challenge for your product to make to the market and sustain there" name="input6" ng-model="user.competitors" value="" required/>
+                            <p ng-show="newDiscoveryForm.input6.$invalid && !newDiscoveryForm.input6.$pristine" style="color: #880000">Competitors required.</p>
+                            <div class="error"></div>
+                            <div class="description">Traditional Commuting Solution</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="d-lname">How do you differntiate from your competitors</label>
+                            <input class="text long-field" type="text" id="differentiator" placeholder="Identify your USP (Unique Selling Proposition), features that makes your product unique" name="input7" ng-model="user.differentiator" value="" required/>
+                            <p ng-show="newDiscoveryForm.input7.$invalid && !newDiscoveryForm.input7.$pristine" style="color: #880000">Differentiator required.</p>
+                            <div class="error"></div>
+                            <div class="description">[Automated, Secure]</div>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="buttons-container">
+                        <div class="buttons">
+
+                            <button class="aui-button aui-button-primary ap-dialog-submit" value="Submit" type="submit"
+                                    id="save-button" ng-click = "preview(user)" ng-disabled="newDiscoveryForm.$invalid">Save</button>
+                            <button id="close-button" type="button" class="aui-button aui-button-link ap-dialog-cancel" ng-click = "cancelClick(user)">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+    </div>
+
+    <div class="aui-page-panel aui-page-focused aui-page-focused-large"  id="createNewDiscoveryExistingForm" style="display: none" >
+        <div class ="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+                <h2>Create Your Vision Statement</h2>
+
+
+                <form class="aui newDiscoveryFormExisting" name="newDiscoveryFormExisting" novalidate>
+                    <span us-spinner="{radius:10, width:2, length: 8}"></span>
+
+                    <fieldset class="group">
+
+
+                        <div class="field-group aui-select2-userpicker">
+                            <label for="my-project-picker">Project</label>
+                            <input type="text" id="my-project-picker" name="jira-project" ng-model="user.jiraProject" class="text long-field" data-placeholder="Select a Project" required/>
+                            <p ng-show="newDiscoveryFormExisting.jira-project.$invalid && !newDiscoveryFormExisting.jira-project.$pristine" style="color: #880000">JIRA Project  is required</p>
+
+                        </div>
+
+                        <div class="field-group aui-select2-userpicker">
+                            <label for="my-user-picker-existing">Discoverer</label>
+                            <input type="text" id="my-user-picker-existing" name="user-discoverer" ng-model="user.jiraUser" class="text long-field" data-placeholder="Select a Discoverer" required/>
+                            <p ng-show="newDiscoveryFormExisting.user-discoverer.$invalid && !newDiscoveryFormExisting.user-discoverer.$pristine" style="color: #880000">Discoverer is required</p>
+                        </div>
+
+                        <div class="field-group">
+
+                            <label class="label">Product Name</label>
+                            <input class="text" type="text" name="productname" placeholder="This is the Name of the product" ng-model="user.productName" unique-productname="" value="" required/>
+                            <p ng-show="newDiscoveryFormExisting.productname.$invalid && !newDiscoveryFormExisting.productname.$pristine" style="color: #880000">Product name is required.</p>
+                            <span class="hide-while-in-focus" ng-show="newDiscoveryFormExisting.productname.$error.unique" style="color: #880000">Discovery Product exists. Choose a different name</span>
+
+                        </div>
+
+                        <div class="field-group">
+                            <input class="text" type="text" name="input2" placeholder="These are the People/Audience who will actually use your product" ng-model="user.endUsers" value="" required/>
+                            <p ng-show="newDiscoveryFormExisting.input2.$invalid && !newDiscoveryFormExisting.input2.$pristine" style="color: #880000">EndUsers required.</p>
+                            <label class="label">Who are end users</label>
+                            <div class="description">[Gamers, Engineers, Commuters, Media, Goverment]</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="licenseKey">What Problem Are They Facing Today</label>
+                            <textarea class="textarea" rows="4" cols="10" name="input3" placeholder="This is the Statement of Need. List the problems that your end users are facing and you are trying to solve" ng-model="user.problemsArea" id="problemsarea" value="" required></textarea>
+                            <p ng-show="newDiscoveryFormExisting.input3.$invalid && !newDiscoveryFormExisting.input3.$pristine" style="color: #880000">ProblemsArea required.</p>
+                            <div class="description">Spend So much in .....</div>
+                        </div>
+
+                        <div class="field-group">
+
+                            <label class="label">What kind of product is this</label>
+                            <input class="text" type="text" name="input4" placeholder="This is the Type of your Product" ng-model="user.productKind" id="productkind" value="" required/>
+                            <p ng-show="newDiscoveryFormExisting.input4.$invalid && !newDiscoveryFormExisting.input4.$pristine" style="color: #880000">ProductKind required.</p>
+                            <div class="description">[Software, MobileApp, JIRA-Plugin]</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="d-lname">How do you plan to solve the problem</label>
+                            <input class="text long-field" type="text" id="problemSoln" placeholder="This is your approach for solving the user's problem's" name="input5" ng-model="user.problemSoln" value="" required />
+                            <p ng-show="newDiscoveryFormExisting.input5.$invalid && !newDiscoveryFormExisting.input5.$pristine" style="color: #880000">ProblemSolution required.</p>
+                            <div class="error"></div>
+                            <div class="description">[Load Balancing of Personal, Automated Traffic Info]</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="d-lname">Who are your competitors</label>
+                            <input class="text long-field" type="text" id="competitors" placeholder="This could be anything that is a challenge for your product to make to the market and sustain there" name="input6" ng-model="user.competitors" value="" required/>
+                            <p ng-show="newDiscoveryFormExisting.input6.$invalid && !newDiscoveryFormExisting.input6.$pristine" style="color: #880000">Competitors required.</p>
+                            <div class="error"></div>
+                            <div class="description">Traditional Commuting Solution</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="d-lname">How do you differntiate from your competitors</label>
+                            <input class="text long-field" type="text" placeholder="Identify your USP (Unique Selling Proposition), features that makes your product unique" id="differentiator" name="input7" ng-model="user.differentiator" value="" required/>
+                            <p ng-show="newDiscoveryFormExisting.input7.$invalid && !newDiscoveryFormExisting.input7.$pristine" style="color: #880000">Differentiator required.</p>
+                            <div class="error"></div>
+                            <div class="description">[Automated, Secure]</div>
+                        </div>
+
+
+                    </fieldset>
+
+                    <div class="buttons-container" style="float: inherit">
+                        <div class="buttons">
+
+                            <button class="aui-button aui-button-primary ap-dialog-submit"
+                                    aria-disabled="false" id="save-button" ng-click="previewExisting(user)" ng-disabled="newDiscoveryFormExisting.$invalid">Save</button>
+                            <button id="close-button" type="button" class="aui-button aui-button-link ap-dialog-cancel" ng-click = "cancelClick(user)">Cancel</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </section>
+        </div>
+    </div>
+
+    <div  class="aui-page-focused aui-page-focused-medium" id="success-discovery" style="display: none" >
+
+        <div class="aui-message info">
+            <p class="title">
+                <span class="aui-icon icon-info"></span>
+                Woohoo! Your first step towards building awesome Product is done! Continue to Discover your Product <a href="{{hostBaseUrl}}/plugins/servlet/ac/leanGears-Discovery/continueDiscovery" target="_blank">here</a>. While you can continue to discover product, you need developer access to JIRA Project to create underlying JIRA tickets. Please contact your JIRA Administrator or project admin to get the developer privilege.
+
+            </p>
+        </div>
+    </div>
+
+
+    <div  class="aui-page-focused aui-page-focused-medium" id="error-discovery" style="display: none" >
+
+        <div class="aui-message info">
+            <p class="title">
+                <span class="aui-icon icon-info"></span>
+                Your discovery project could not be created. Please ask your administrator or check logs.
+
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+

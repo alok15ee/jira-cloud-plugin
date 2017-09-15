@@ -1,0 +1,24 @@
+{
+  "name": "my-addon",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "dependencies": {
+    "atlassian-connect-express": "latest",
+    "chai": "^3.5.0",
+    "express": "~3.3.4",
+    "express-hbs": "*",
+    "jugglingdb-mongodb": "latest",
+    "mocha": "^2.4.5",
+    "mongodb": "latest",
+    "mongoose": "latest",
+    "request": "^2.72.0",
+    "static-expiry": ">=0.0.5"
+  },
+  "devDependencies": {
+    "chai-http": "^2.0.1"
+  }
+}

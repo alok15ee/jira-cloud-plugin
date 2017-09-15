@@ -1,0 +1,82 @@
+{{!< layout}}
+
+
+<body style="background:white">
+
+<div class="aui-dialog2-content">
+    <script>
+
+        $(function(){
+
+            AP.require('events', function(events){
+                events.on('loadDyamicParams', function(param1, param2, param3, param4, param5, param6, param7, param8){
+                    events.offAll('setFeedbackToDelete');
+                    // use the param1, param2, param3 as needed in this handler function
+/*
+                    discoveryProductName = document.getElementById("discoveryProductName");
+                    discoveryProductName.value = param1;
+
+                    endUsers = document.getElementById("endUsers");
+                    endUsers.value = param2;
+
+                    problemsArea = document.getElementById("problemsArea");
+                    problemsArea.value = param3;
+
+                    productKind = document.getElementById("productKind");
+                    productKind.value = param4;
+
+                    problemSolution = document.getElementById("problemSolution");
+                    problemSolution.value = param5;
+
+                    competitors = document.getElementById("competitors");
+                    competitors.value = param6;
+
+                    differentiator = document.getElementById("differentiator");
+                    differentiator.value = param7;*/
+
+                    $('#discoveryProductName').text(param1);
+                    $('#endUsers').text(param2);
+                    $('#problemsArea').text(param3);
+                    $('#productKind').text(param4);
+                    $('#problemSolution').text(param5);
+                    $('#competitors').text(param6);
+                    $('#differentiator').text(param7);
+
+                });
+                events.emit('getDynamicParams');
+            });
+            AP.require('dialog', function(dialog) {
+                dialog.getButton('submit').bind(function() {
+
+                    AP.require('events', function(events){
+                        events.emit('customEvent');
+                        dialog.close();
+                    });
+
+                });
+                dialog.getButton('cancel').bind(function () {
+                    dialog.close();
+                });
+            });
+
+        });
+
+    </script>
+
+            <div>
+                <span id="vision-statement" style="word-break: break-all">
+
+                     <p style="text-align: center;">For  <b><span id="endUsers"> </span></b></p>
+                        <p style="text-align: center;">who are <b><span id="problemsArea"> </span></b></p>
+                        <p style="text-align: center;">the <b><span id="discoveryProductName"> </span></b></p>
+                        <p style="text-align: center;">is a <b><span id="productKind"> </span></b></p>
+                        <p style="text-align: center;">that <b><span id="problemSolution"> </span></b></p>
+                        <p style="text-align: center;">unlike <b><span id="competitors"> </span></b></p>
+                        <p style="text-align: center;">our product <b><span id="differentiator"> </span></b></p>
+
+                </span>
+            </div>
+
+</div>
+
+</body>
